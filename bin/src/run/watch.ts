@@ -117,8 +117,8 @@ export default function watch(
 							input = Array.isArray(input)
 								? input.join(', ')
 								: Object.keys(input)
-									.map(key => (<Record<string, string>>input)[key])
-									.join(', ');
+										.map(key => (<Record<string, string>>input)[key])
+										.join(', ');
 						}
 						stderr(
 							tc.cyan(
@@ -158,6 +158,7 @@ export default function watch(
 	// only listen to stdin if it is a pipe
 	if (!process.stdin.isTTY) {
 		process.stdin.on('end', close); // in case we ever support stdin!
+		process.stdin.resume();
 	}
 
 	function close(err: Error) {
